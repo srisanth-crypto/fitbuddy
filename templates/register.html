@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}Create Free Account – FitBuddy AI Fitness Platform{% endblock %}
+
+{% block content %}
+<div class="auth-split-wrapper" style="max-width: 1100px;">
+    
+    <!-- Left Hero Banner Panel -->
+    <div class="auth-hero-panel">
+        <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+                <span style="font-size: 2rem;">⚡</span>
+                <span style="font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px;">FitBuddy</span>
+            </div>
+
+            <h2>Join 25,000+ Athletes Leveling Up Their Fitness</h2>
+            <p>Create your free athlete profile today and get immediate access to AI-powered workout engineering and daily habit streak tracking.</p>
+
+            <ul class="auth-benefit-list">
+                <li class="auth-benefit-item">
+                    <div class="auth-benefit-icon">🎁</div>
+                    <div>
+                        <strong style="color: white;">3 Free AI Generations Monthly</strong>
+                        <div style="color: #94a3b8; font-size: 0.85rem;">Periodized 7-day splits customized to your metrics.</div>
+                    </div>
+                </li>
+                <li class="auth-benefit-item">
+                    <div class="auth-benefit-icon">🥗</div>
+                    <div>
+                        <strong style="color: white;">Smart Nutrition & Hydration</strong>
+                        <div style="color: #94a3b8; font-size: 0.85rem;">Calculated macros and daily water intake targets.</div>
+                    </div>
+                </li>
+                <li class="auth-benefit-item">
+                    <div class="auth-benefit-icon">🏆</div>
+                    <div>
+                        <strong style="color: white;">Global Leaderboard & Streaks</strong>
+                        <div style="color: #94a3b8; font-size: 0.85rem;">Log completed training days and build unstoppable habits.</div>
+                    </div>
+                </li>
+                <li class="auth-benefit-item">
+                    <div class="auth-benefit-icon">📱</div>
+                    <div>
+                        <strong style="color: white;">Installable PWA Application</strong>
+                        <div style="color: #94a3b8; font-size: 0.85rem;">Add to your phone's home screen for 1-tap gym access.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem 1.25rem; border-radius: var(--radius-sm); font-size: 0.85rem; color: #cbd5e1;">
+            ⭐ <strong>Zero Risk:</strong> 100% Free Starter account. No credit card required.
+        </div>
+    </div>
+
+    <!-- Right Registration Form Panel -->
+    <div class="card" style="margin-bottom: 0; padding: 2rem 2.25rem;">
+        <div class="card-header" style="text-align: left; padding-bottom: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <h1 class="card-title" style="font-size: 1.65rem; margin: 0;">Create Free Account</h1>
+                <span class="badge badge-success">Free Tier</span>
+            </div>
+            <p class="card-subtitle">Set up your athlete account & profile parameters.</p>
+        </div>
+
+        <!-- Dynamic Alerts -->
+        <div id="register-error" class="alert alert-danger" style="display: none; margin-bottom: 1.25rem;"></div>
+        <div id="register-success" class="alert alert-success" style="display: none; margin-bottom: 1.25rem;"></div>
+
+        <form id="registerForm">
+            <!-- Account Credentials -->
+            <div style="margin-bottom: 1.25rem;">
+                <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;">Step 1: Account Credentials</span>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="reg_username" class="form-label" style="font-weight: 600;">Username / Athlete Handle</label>
+                    <input 
+                        type="text" 
+                        id="reg_username" 
+                        name="username" 
+                        class="form-control" 
+                        placeholder="e.g. alex_fitness" 
+                        required 
+                        minlength="2"
+                        maxlength="50"
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="reg_email" class="form-label" style="font-weight: 600;">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="reg_email" 
+                        name="email" 
+                        class="form-control" 
+                        placeholder="alex@example.com" 
+                        required 
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="reg_password" class="form-label" style="font-weight: 600;">Password (min. 6 characters)</label>
+                    <input 
+                        type="password" 
+                        id="reg_password" 
+                        name="password" 
+                        class="form-control" 
+                        placeholder="••••••••" 
+                        required 
+                        minlength="6"
+                        autocomplete="new-password"
+                    >
+                </div>
+            </div>
+
+            <!-- Athlete Profile -->
+            <div style="margin: 1.5rem 0 1rem;">
+                <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;">Step 2: Athletic Profile Defaults</span>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="reg_age" class="form-label" style="font-weight: 600;">Age (Years)</label>
+                    <input 
+                        type="number" 
+                        id="reg_age" 
+                        name="age" 
+                        class="form-control" 
+                        min="10" 
+                        max="120" 
+                        value="25"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="reg_weight" class="form-label" style="font-weight: 600;">Weight (kg)</label>
+                    <input 
+                        type="number" 
+                        step="0.1" 
+                        id="reg_weight" 
+                        name="weight" 
+                        class="form-control" 
+                        min="20" 
+                        max="350" 
+                        value="70.0"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="reg_goal" class="form-label" style="font-weight: 600;">Default Goal</label>
+                    <select id="reg_goal" name="goal" class="form-control">
+                        <option value="General Fitness">General Fitness</option>
+                        <option value="Weight Loss">Weight Loss</option>
+                        <option value="Muscle Gain">Muscle Gain</option>
+                        <option value="General Wellness">Longevity & Wellness</option>
+                        <option value="Flexibility">Flexibility</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg_intensity" class="form-label" style="font-weight: 600;">Default Intensity</label>
+                    <select id="reg_intensity" name="intensity" class="form-control">
+                        <option value="Low">Low (Gentle)</option>
+                        <option value="Medium" selected>Medium (Balanced)</option>
+                        <option value="High">High (Challenging)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" id="registerBtn" class="btn-primary" style="margin-top: 1rem; width: 100%; justify-content: center; padding: 0.85rem 1.5rem; font-size: 1rem;">
+                <span>Create Free FitBuddy Account</span>
+            </button>
+        </form>
+
+        <div style="text-align: center; border-top: 1px solid var(--border); padding-top: 1.25rem; font-size: 0.95rem; color: var(--text-muted); margin-top: 1.5rem;">
+            Already have a FitBuddy athlete account? 
+            <a href="/login" style="color: var(--primary); font-weight: 700; text-decoration: none; margin-left: 0.25rem;">Sign In →</a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
