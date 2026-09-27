@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Support – FitBuddy Fitness Platform{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <span class="hero-tag">We're Here to Help</span>
+    <h1 class="hero-title">Get in Touch with <span>FitBuddy Support</span></h1>
+    <p class="hero-desc">Have questions about your AI fitness plans, subscription billing, custom workout features, or enterprise partnerships? Send us a message.</p>
+</section>
+
+{% if contact_submitted %}
+<div class="alert alert-success" role="alert" style="max-width: 800px; margin: 0 auto 2rem;">
+    <div>
+        <strong>🎉 Message Received, {{ sender_name }}!</strong>
+        <p style="margin-top: 0.25rem;">We have received your inquiry regarding <em>"{{ subject }}"</em>. Our support team typically responds within 2 hours during business operations.</p>
+    </div>
+</div>
+{% endif %}
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto 4rem;">
+
+    <!-- Left: Contact Form -->
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Send a Message</h2>
+            <p class="card-subtitle">Fill out the details below and an agent will follow up via email.</p>
+        </div>
+
+        <form action="/submit-contact" method="POST">
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="contact_name" class="form-label">Full Name</label>
+                <input type="text" id="contact_name" name="name" class="form-control" placeholder="e.g. Sarah Connor" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="contact_email" class="form-label">Email Address</label>
+                <input type="email" id="contact_email" name="email" class="form-control" placeholder="sarah@example.com" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="contact_subject" class="form-label">Subject</label>
+                <select id="contact_subject" name="subject" class="form-control" required>
+                    <option value="General Inquiry">General Question / Inquiry</option>
+                    <option value="Subscription & Billing">Subscription & Billing Help</option>
+                    <option value="Workout Generation Issue">Workout Generation / AI Question</option>
+                    <option value="Bug Report">Technical Bug Report</option>
+                    <option value="Partnership / Coaching">Partnership / Coaching Inquiries</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label for="contact_message" class="form-label">Your Message</label>
+                <textarea id="contact_message" name="message" class="form-control" rows="5" placeholder="How can we assist you today?" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary">
+                <span>✉️ Send Message</span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Right: Quick Support Channels & Information -->
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <div class="card" style="border-top: 4px solid var(--primary);">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+            <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem;">Direct Support Email</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                For urgent account inquiries or billing disputes, reach out directly to our dedicated support inbox:
+            </p>
+            <div style="background: var(--primary-light); padding: 0.75rem 1rem; border-radius: var(--radius-sm); font-weight: 700; color: var(--primary); font-size: 0.95rem;">
+                support@fitbuddy.ai
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 0.75rem;">Support Hours & SLA</h3>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.9rem; color: var(--text-main);">
+                <li>🕒 <strong>Monday – Friday:</strong> 8:00 AM – 8:00 PM EST</li>
+                <li>🕒 <strong>Saturday – Sunday:</strong> 10:00 AM – 6:00 PM EST</li>
+                <li>⚡ <strong>Average First Response Time:</strong> &lt; 2 Hours</li>
+                <li>⭐ <strong>Pro Member Priority:</strong> Immediate queue escalation</li>
+            </ul>
+        </div>
+
+        <div class="card" style="background: #f8fafc; border: 1px dashed var(--border);">
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem;">Looking for quick answers?</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                Check out our Frequently Asked Questions section covering AI generation limits, PDF exports, and workout plan adjustments.
+            </p>
+            <a href="/faq" class="btn-secondary" style="width: 100%; justify-content: center; font-weight: 600;">
+                Visit FAQ Knowledge Base →
+            </a>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
