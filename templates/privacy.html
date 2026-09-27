@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy – FitBuddy Fitness Platform{% endblock %}
+
+{% block content %}
+<div style="max-width: 850px; margin: 2rem auto 4rem;">
+    <div style="margin-bottom: 2rem;">
+        <span class="hero-tag">Legal & Data Protection</span>
+        <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--dark); margin-top: 0.5rem;">Privacy Policy</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Last updated: September 2026 • Compliant with global data protection standards.</p>
+    </div>
+
+    <div class="card" style="padding: 2.5rem; line-height: 1.8; color: var(--text-main);">
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 0.75rem;">1. Introduction & Overview</h2>
+        <p style="margin-bottom: 1.5rem; color: #475569;">
+            FitBuddy ("we," "our," or "us") is dedicated to safeguarding your personal data and fitness telemetry. This Privacy Policy explains how information is collected, processed, encrypted, and protected when you use the FitBuddy web platform, API services, and progressive web application.
+        </p>
+
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 0.75rem;">2. Information We Collect</h2>
+        <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: #475569;">
+            <li><strong>Account & Identity Data:</strong> Username, email address, password hash (salted and encrypted via bcrypt).</li>
+            <li><strong>Fitness & Telemetry Metrics:</strong> Age, body weight (kg), primary fitness goals (e.g. Muscle Gain, Fat Loss), workout intensity levels, and daily workout completion timestamps.</li>
+            <li><strong>AI Generation Data:</strong> Workout prompts, custom exercise modification feedback, and generated 7-day splits.</li>
+            <li><strong>Payment & Billing Data:</strong> Payment details are processed directly and securely via Stripe. FitBuddy does not store your raw credit card number or CVV codes.</li>
+        </ul>
+
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 0.75rem;">3. How We Use Your Information</h2>
+        <p style="margin-bottom: 1.5rem; color: #475569;">
+            We process your information strictly to:
+        </p>
+        <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: #475569;">
+            <li>Generate personalized 7-day exercise plans and nutrition recommendations via Google Gemini AI models.</li>
+            <li>Track workout streaks, consistency metrics, and calculate leaderboard rankings.</li>
+            <li>Enforce monthly subscription quotas and process Stripe Pro upgrades.</li>
+            <li>Provide customer support, respond to tickets, and diagnose technical issues.</li>
+        </ul>
+
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 0.75rem;">4. AI Model Data Transmission & Zero-Training Policy</h2>
+        <p style="margin-bottom: 1.5rem; color: #475569;">
+            Workout generation inputs (age, weight, goals, intensity) are sent to Google Gemini enterprise endpoints solely to construct your fitness routines. Your private profile metrics are not sold to third-party data brokers and are not used for targeted external advertising.
+        </p>
+
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 0.75rem;">5. Data Security & Storage</h2>
+        <p style="margin-bottom: 1.5rem; color: #475569;">
+            We employ modern encryption protocols (HTTPS / TLS 1.3), JSON Web Token (JWT) stateless authorization, and parameterized SQL queries to protect against unauthorized access, injection attacks, and data leakage.
+        </p>
+
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 0.75rem;">6. Your Rights & Data Deletion</h2>
+        <p style="margin-bottom: 1.5rem; color: #475569;">
+            You maintain full ownership of your data. You may delete individual saved plans at any time via your Athlete Dashboard or request a complete purge of your account by contacting our privacy officer at <a href="mailto:privacy@fitbuddy.ai" style="color: var(--primary); font-weight: 600;">privacy@fitbuddy.ai</a>.
+        </p>
+    </div>
+</div>
+{% endblock %}
