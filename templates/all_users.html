@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}All Registered Users – Admin View – FitBuddy{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+    <div>
+        <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--dark);">
+            👥 User Plans & Database Records
+        </h1>
+        <p style="color: var(--text-muted);">Demonstration admin overview showing stored athlete metrics and generated programs.</p>
+    </div>
+    <a href="/" class="btn-primary" style="width: auto;">➕ New Fitness Plan</a>
+</div>
+
+<div class="card" style="padding: 0; overflow: hidden;">
+    <div style="padding: 1rem 1.5rem; background: #f8fafc; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+        <strong style="color: var(--dark);">Total Registered Users: {{ total_users }}</strong>
+        <span class="badge badge-primary">SQLite Stored</span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Age / Wt</th>
+                    <th>Goal</th>
+                    <th>Intensity</th>
+                    <th>Plans Generated</th>
+                    <th>Plan View</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td><strong>{{ u.user_id }}</strong></td>
+                    <td>{{ u.username }}</td>
+                    <td>{{ u.age }} yrs / {{ u.weight }} kg</td>
+                    <td><span style="font-weight: 500;">{{ u.goal }}</span></td>
+                    <td>
+                        <span class="badge {% if u.intensity == 'High' %}badge-warning{% elif u.intensity == 'Medium' %}badge-primary{% else %}badge-success{% endif %}">
+                            {{ u.intensity }}
+                        </span>
+                    </td>
+                    <td>{{ u.plans | length }}</td>
+                    <td>
+                        {% if u.plans %}
+                            {% set latest = u.plans[-1] %}
+                            <details>
+                                <summary>View Plan</summary>
+                                <div style="margin-top: 0.5rem; padding: 0.75rem; background: #f8fafc; border-radius: 6px; font-size: 0.82rem; max-height: 200px; overflow-y: auto; white-space: pre-wrap;">
+                                    {% if latest.updated_plan %}
+                                        <div style="margin-bottom: 0.4rem;"><strong style="color: var(--warning);">[REVISED PLAN]</strong> {% if latest.feedback %}<em style="color: var(--text-muted); font-size: 0.78rem;">(Feedback: "{{ latest.feedback }}")</em>{% endif %}</div>
+                                        {{ latest.updated_plan }}
+                                    {% else %}
+                                        <div style="margin-bottom: 0.4rem;"><strong style="color: var(--primary);">[ORIGINAL PLAN]</strong></div>
+                                        {{ latest.original_plan }}
+                                    {% endif %}
+                                </div>
+                            </details>
+                        {% else %}
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">None</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/feedback/{{ u.user_id }}" class="btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">
+                            ✏️ Feedback
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+                        No users registered yet. <a href="/" style="color: var(--primary); font-weight: 600;">Create the first workout plan now!</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
