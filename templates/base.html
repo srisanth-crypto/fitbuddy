@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FitBuddy – AI Fitness Plan Generator{% endblock %}</title>
+    
+    <!-- PWA & Mobile Web Capabilities -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FitBuddy">
+
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+                <span class="brand-icon">⚡</span>
+                <span class="brand-title">FitBuddy</span>
+                <span class="brand-ai-badge">Gemini Powered</span>
+            </a>
+            <nav class="nav-links">
+                <a href="/" class="nav-item">Home</a>
+                <a href="/features" class="nav-item">Features</a>
+                <a href="/pricing" class="nav-item">Pricing</a>
+                <a href="/community" class="nav-item" style="font-weight: 600; color: var(--primary);">🌐 Community</a>
+                <a href="/feedback" class="nav-item">Feedback</a>
+                <a href="/dashboard" id="nav-dashboard-link" class="nav-item" style="display: none;">Dashboard</a>
+                <a href="/view-all-users" class="nav-item">Records</a>
+                <a href="/docs" target="_blank" class="nav-item">API Docs</a>
+
+                <!-- Dynamic Auth Navigation State (Managed by client JS & localStorage) -->
+                <div id="nav-guest" style="display: flex; gap: 0.75rem; align-items: center;">
+                    <a href="/login" class="nav-item" style="font-weight: 600;">Login</a>
+                    <a href="/register" class="nav-btn">Register</a>
+                </div>
+
+                <div id="nav-authenticated" style="display: none; gap: 0.75rem; align-items: center;">
+                    <span id="nav-tier-badge" class="badge badge-primary" style="display: none;">PRO</span>
+                    <a href="/dashboard" id="nav-username-display" style="font-weight: 600; font-size: 0.9rem; color: var(--primary); text-decoration: none;"></a>
+                    <button id="upgradeProBtn" class="btn-primary" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; background: linear-gradient(135deg, #f59e0b, #d97706); display: none;">⭐ Go Pro</button>
+                    <button id="logoutBtn" class="btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.85rem;">Logout</button>
+                </div>
+
+                <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 0.5rem;" class="status-indicator">
+                    {% if gemini_active %}
+                        <span class="status-dot dot-green"></span>Gemini Live
+                    {% else %}
+                        <span class="status-dot dot-amber"></span>Fallback Active
+                    {% endif %}
+                </span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Rich Multi-Column SaaS Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- Brand & Mission Column -->
+                <div class="footer-col brand-col">
+                    <div class="footer-brand">
+                        <span class="brand-icon">⚡</span>
+                        <span class="brand-title">FitBuddy</span>
+                    </div>
+                    <p class="footer-desc">
+                        Commercial AI Fitness & Personalized Coaching SaaS. Generating science-backed 7-day workout splits and nutrition guidance powered by Google Gemini AI & Stripe.
+                    </p>
+                    <div class="footer-badge-wrap">
+                        <span class="brand-ai-badge">Google Gemini 1.5 Powered</span>
+                    </div>
+                </div>
+
+                <!-- Product Column -->
+                <div class="footer-col">
+                    <h3 class="footer-heading">Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">⚡ AI Workout Generator</a></li>
+                        <li><a href="/features">🚀 Platform Features</a></li>
+                        <li><a href="/pricing">⭐ Pricing & Pro Tier</a></li>
+                        <li><a href="/dashboard">📊 Athlete Dashboard</a></li>
+                        <li><a href="/community">🌐 Social Community</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources & Support Column -->
+                <div class="footer-col">
+                    <h3 class="footer-heading">Resources & Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about">💡 About FitBuddy</a></li>
+                        <li><a href="/feedback">💬 Athlete Feedback & Reviews</a></li>
+                        <li><a href="/faq">❓ Frequently Asked Questions</a></li>
+                        <li><a href="/contact">✉️ Contact Support</a></li>
+                        <li><a href="/view-all-users">🛡️ Admin Records</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal & Trust Column -->
+                <div class="footer-col">
+                    <h3 class="footer-heading">Legal & Trust</h3>
+                    <ul class="footer-links">
+                        <li><a href="/privacy">🔒 Privacy Policy</a></li>
+                        <li><a href="/terms">📜 Terms of Service</a></li>
+                        <li><a href="/terms#disclaimer">⚠️ Health Disclaimer</a></li>
+                        <li><a href="/docs" target="_blank">📑 Swagger API Docs</a></li>
+                        <li><a href="/api/health" target="_blank">🟢 System Health API</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom">
+                <div>
+                    <p>© 2026 FitBuddy Inc. All rights reserved. Commercial SaaS AI Fitness Platform.</p>
+                </div>
+                <div class="footer-status">
+                    {% if gemini_active %}
+                        <span class="status-dot dot-green"></span><span>Gemini Live AI Engine Connected</span>
+                    {% else %}
+                        <span class="status-dot dot-amber"></span><span>Fallback Heuristic Engine Active</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Client JS & PWA Service Worker Registration -->
+    <script src="/static/js/main.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/static/sw.js')
+                    .then(reg => console.log('PWA ServiceWorker registered with scope:', reg.scope))
+                    .catch(err => console.warn('PWA ServiceWorker registration failed:', err));
+            });
+        }
+    </script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
