@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Platform Features – FitBuddy AI Fitness Platform{% endblock %}
+
+{% block content %}
+<!-- Features Hero -->
+<section class="hero">
+    <span class="hero-tag">Cutting-Edge Fitness Intelligence</span>
+    <h1 class="hero-title">Engineered for <span>Peak Performance</span></h1>
+    <p class="hero-desc">Explore how FitBuddy combines Google Gemini AI reasoning, sports science principles, and interactive tracking to deliver the most personalized fitness experience.</p>
+    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+        <a href="/" class="btn-primary" style="width: auto; padding: 0.85rem 2rem;">⚡ Generate Your Plan</a>
+        <a href="/pricing" class="btn-secondary" style="background: white;">View Pricing & Tiers</a>
+    </div>
+</section>
+
+<!-- Feature Showcase Grid -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+    
+    <!-- Feature 1: Gemini Workout Engine -->
+    <div class="card" style="border-top: 4px solid var(--primary); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="font-size: 2.2rem; background: var(--primary-light); width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">⚡</div>
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--dark);">Gemini AI Workout Engine</h3>
+                    <span class="badge badge-primary">Google Gemini 1.5 Pro</span>
+                </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+                Our core AI model analyzes your age, weight, target goals, and intensity preferences to generate periodized 7-day workout routines complete with warm-ups, progressive overload sets, rep ranges, rest intervals, and cooldowns.
+            </p>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem; color: var(--text-main);">
+                <li>✓ Full 7-Day split architectures tailored to your schedule</li>
+                <li>✓ Scientific warm-up & cool-down mobility sequences</li>
+                <li>✓ Exercise safety cues and posture guidance</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Feature 2: Flash Nutritionist -->
+    <div class="card" style="border-top: 4px solid var(--accent); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="font-size: 2.2rem; background: #ecfdf5; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">🥗</div>
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--dark);">Smart Nutrition & Recovery</h3>
+                    <span class="badge badge-success">Gemini Flash Fast Engine</span>
+                </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+                Nutrition powers recovery. Powered by our ultra-fast Gemini Flash generator, you get calculated daily hydration goals, macronutrient distribution guidelines, pre/post-workout meal timing, and sleep hygiene essentials.
+            </p>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem; color: var(--text-main);">
+                <li>✓ Exact daily hydration formula based on body mass</li>
+                <li>✓ Protein, carb, and healthy fat distribution guidance</li>
+                <li>✓ Active recovery & sleep optimization protocols</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Feature 3: Interactive Streak Tracker -->
+    <div class="card" style="border-top: 4px solid var(--warning); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="font-size: 2.2rem; background: #fef3c7; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">🔥</div>
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--dark);">Streak Tracking & Habits</h3>
+                    <span class="badge badge-warning">Real-time Analytics</span>
+                </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+                Consistency creates transformation. Click off completed workout days directly in your dashboard to maintain active training streaks, track total completed sessions, and monitor your consistency rate.
+            </p>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem; color: var(--text-main);">
+                <li>✓ Day 1 - Day 7 interactive toggle chips</li>
+                <li>✓ Current and all-time longest streak calculations</li>
+                <li>✓ Dynamic completion rate percentage metrics</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Feature 4: Global Community Feed -->
+    <div class="card" style="border-top: 4px solid var(--secondary); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="font-size: 2.2rem; background: #e0f2fe; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">🌐</div>
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--dark);">Social Community & Board</h3>
+                    <span class="badge badge-primary">Global Leaderboard</span>
+                </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+                Connect with fitness enthusiasts worldwide. Share your custom AI routines to the public feed with one click, explore community programs, like top workouts, and climb the global streak leaderboard.
+            </p>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem; color: var(--text-main);">
+                <li>✓ Public/Private plan visibility toggle</li>
+                <li>✓ Real-time like counts and community upvotes</li>
+                <li>✓ Global athlete rankings with streak badges</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Feature 5: ReportLab PDF Export -->
+    <div class="card" style="border-top: 4px solid #8b5cf6; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="font-size: 2.2rem; background: #f3e8ff; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">📄</div>
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--dark);">Styled ReportLab PDF Export</h3>
+                    <span class="badge badge-primary" style="background: #f3e8ff; color: #7c3aed;">PRO & Instant</span>
+                </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+                Take your workout offline or to the gym floor. Export high-resolution, styled PDF workout documents complete with tables, metrics, and branding for easy printing or mobile viewing.
+            </p>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem; color: var(--text-main);">
+                <li>✓ Beautiful multi-page formatted layout</li>
+                <li>✓ Printable tables for gym tracking</li>
+                <li>✓ Instant streaming download without server lag</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Feature 6: PWA & Offline Support -->
+    <div class="card" style="border-top: 4px solid #ec4899; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="font-size: 2.2rem; background: #fdf2f8; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">📱</div>
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--dark);">Progressive Web App (PWA)</h3>
+                    <span class="badge badge-primary" style="background: #fdf2f8; color: #db2777;">Installable</span>
+                </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+                Install FitBuddy straight to your home screen on iOS, Android, or desktop. Enjoy fast load times, background service worker caching, and an app-like native feel wherever you train.
+            </p>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem; color: var(--text-main);">
+                <li>✓ Home screen 1-tap launch without App Store</li>
+                <li>✓ Service worker caching for fast offline assets</li>
+                <li>✓ Lightweight & responsive across all screen sizes</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!-- CTA Banner -->
+<div class="card" style="background: linear-gradient(135deg, var(--dark-surface), var(--dark)); color: white; text-align: center; padding: 3rem 2rem;">
+    <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem;">Ready to Experience Smart Training?</h2>
+    <p style="color: #94a3b8; max-width: 600px; margin: 0 auto 1.75rem; font-size: 1.05rem;">
+        Generate your custom 7-day routine in seconds, track your daily progress, and achieve your peak physique with FitBuddy.
+    </p>
+    <a href="/" class="btn-primary" style="display: inline-flex; width: auto; padding: 0.85rem 2.25rem; font-size: 1.05rem;">
+        ⚡ Generate Free Workout Plan
+    </a>
+</div>
+{% endblock %}
