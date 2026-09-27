@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Athlete Sign In – FitBuddy AI Platform{% endblock %}
+
+{% block content %}
+<div class="auth-split-wrapper">
+    
+    <!-- Left Hero Banner Panel -->
+    <div class="auth-hero-panel">
+        <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+                <span style="font-size: 2rem;">⚡</span>
+                <span style="font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px;">FitBuddy</span>
+            </div>
+
+            <h2>Empower Your Daily Training with AI</h2>
+            <p>Sign in to sync your workout history, log daily active streaks, export ReportLab PDFs, and participate in the global athlete leaderboard.</p>
+
+            <ul class="auth-benefit-list">
+                <li class="auth-benefit-item">
+                    <div class="auth-benefit-icon">📊</div>
+                    <div>
+                        <strong style="color: white;">Real-Time Dashboard</strong>
+                        <div style="color: #94a3b8; font-size: 0.85rem;">Track 7-day splits and active day completion chips.</div>
+                    </div>
+                </li>
+                <li class="auth-benefit-item">
+                    <div class="auth-benefit-icon">🔥</div>
+                    <div>
+                        <strong style="color: white;">Daily Habit Streaks</strong>
+                        <div style="color: #94a3b8; font-size: 0.85rem;">Maintain consistency and earn verified leaderboard badges.</div>
+                    </div>
+                </li>
+                <li class="auth-benefit-item">
+                    <div class="auth-benefit-icon">📄</div>
+                    <div>
+                        <strong style="color: white;">ReportLab PDF Downloads</strong>
+                        <div style="color: #94a3b8; font-size: 0.85rem;">Export styled workout cards for offline gym training.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem 1.25rem; border-radius: var(--radius-sm); font-size: 0.85rem; color: #cbd5e1;">
+            🔒 <strong>Stateless Security:</strong> Passwords encrypted with bcrypt & authenticated via JSON Web Tokens (JWT).
+        </div>
+    </div>
+
+    <!-- Right Sign In Form Panel -->
+    <div class="card" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <div class="card-header" style="text-align: left; padding-bottom: 1.25rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <h1 class="card-title" style="font-size: 1.65rem; margin: 0;">Welcome Back</h1>
+                    <span class="badge badge-primary">Athlete Portal</span>
+                </div>
+                <p class="card-subtitle">Enter your credentials to access your personal dashboard.</p>
+            </div>
+
+            <!-- Dynamic Alerts -->
+            <div id="login-error" class="alert alert-danger" style="display: none; margin-bottom: 1.25rem;"></div>
+            <div id="login-success" class="alert alert-success" style="display: none; margin-bottom: 1.25rem;"></div>
+
+            <form id="loginForm">
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                    <label for="username_or_email" class="form-label" style="font-weight: 600;">Username or Email</label>
+                    <input 
+                        type="text" 
+                        id="username_or_email" 
+                        name="username_or_email" 
+                        class="form-control" 
+                        placeholder="e.g. alex101 or alex@example.com" 
+                        required 
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <label for="password" class="form-label" style="font-weight: 600;">Password</label>
+                        <a href="/contact" style="font-size: 0.8rem; color: var(--primary); text-decoration: none;">Forgot password?</a>
+                    </div>
+                    <div style="position: relative;">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="form-control" 
+                            placeholder="••••••••" 
+                            required 
+                            autocomplete="current-password"
+                            style="padding-right: 2.5rem;"
+                        >
+                        <button type="button" id="togglePasswordBtn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 1rem;" title="Toggle password visibility">
+                            👁️
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" id="loginBtn" class="btn-primary" style="margin-bottom: 1.25rem; width: 100%; justify-content: center; padding: 0.85rem 1.5rem; font-size: 1rem;">
+                    <span>Sign In to FitBuddy</span>
+                </button>
+            </form>
+        </div>
+
+        <div style="text-align: center; border-top: 1px solid var(--border); padding-top: 1.5rem; font-size: 0.95rem; color: var(--text-muted); margin-top: 1.5rem;">
+            Don't have a FitBuddy athlete account yet? 
+            <a href="/register" style="color: var(--primary); font-weight: 700; text-decoration: none; margin-left: 0.25rem;">Create Account Free →</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleBtn = document.getElementById('togglePasswordBtn');
+        const passInput = document.getElementById('password');
+        if (toggleBtn && passInput) {
+            toggleBtn.addEventListener('click', () => {
+                if (passInput.type === 'password') {
+                    passInput.type = 'text';
+                    toggleBtn.textContent = '🔒';
+                } else {
+                    passInput.type = 'password';
+                    toggleBtn.textContent = '👁️';
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}
