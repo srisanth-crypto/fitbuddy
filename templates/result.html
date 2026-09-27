@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Your AI Fitness Plan – FitBuddy{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+    <div>
+        <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--dark);">
+            {% if is_updated %}
+                🔄 Revised Fitness Program
+            {% else %}
+                🎉 Your Personalized 7-Day Plan
+            {% endif %}
+        </h1>
+        <p style="color: var(--text-muted);">Crafted specifically for <strong>{{ user.username }}</strong> ({{ user.user_id }})</p>
+    </div>
+    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;" class="no-print">
+        <a href="/api/plans/{{ plan.id }}/pdf" id="exportPdfBtn" class="btn-secondary" style="border-color: #cbd5e1; background: #ffffff;">
+            📄 Export PDF
+        </a>
+        <button onclick="window.print()" class="btn-secondary" style="border-color: #cbd5e1; background: #ffffff;">
+            🖨️ Print Plan
+        </button>
+        <a href="/feedback/{{ user.user_id }}" class="btn-primary" style="width: auto;">✏️ Adjust Plan</a>
+    </div>
+</div>
+
+{% if is_updated %}
+<div class="alert alert-success">
+    <div>
+        <strong>Plan Successfully Updated!</strong>
+        <p style="margin-top: 0.25rem;">Feedback applied: <em>"{{ feedback_applied }}"</em></p>
+    </div>
+</div>
+{% endif %}
+
+<!-- User Profile Metrics Summary Bar -->
+<div class="card" style="padding: 1.25rem 1.75rem; margin-bottom: 1.5rem;">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; align-items: center;">
+        <div>
+            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Goal</span>
+            <div style="font-weight: 700; color: var(--primary);">{{ user.goal }}</div>
+        </div>
+        <div>
+            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Intensity</span>
+            <div><span class="badge badge-primary">{{ user.intensity }}</span></div>
+        </div>
+        <div>
+            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Age / Weight</span>
+            <div style="font-weight: 600;">{{ user.age }} yrs / {{ user.weight }} kg</div>
+        </div>
+        <div>
+            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Generated At</span>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">{{ plan.created_at.strftime('%b %d, %Y %H:%M') }}</div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Workout Plan Output -->
+<div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <h2 class="card-title">📅 7-Day Workout Routine</h2>
+            <p class="card-subtitle">Follow the warm-ups, rep schemes, and cooldowns for each day.</p>
+        </div>
+        {% if is_updated %}
+            <span class="badge badge-warning">Revised Version</span>
+        {% else %}
+            <span class="badge badge-success">Original Plan</span>
+        {% endif %}
+    </div>
+
+    <div class="plan-container">{{ current_plan_text }}</div>
+</div>
+
+<!-- Nutrition & Recovery Section -->
+{% if plan.nutrition_tip %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">🥗 Nutrition & Recovery Blueprint</h2>
+        <p class="card-subtitle">Macronutrient guidance, daily hydration target, and rest recommendations.</p>
+    </div>
+    <div class="nutrition-box">{{ plan.nutrition_tip }}</div>
+</div>
+{% endif %}
+
+<!-- Bottom Action Bar -->
+<div style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;" class="no-print">
+    <a href="/api/plans/{{ plan.id }}/pdf" class="btn-secondary" style="padding: 0.85rem 1.5rem;">
+        <span>📄 Download Official PDF</span>
+    </a>
+    <a href="/feedback/{{ user.user_id }}" class="btn-primary" style="width: auto; padding: 0.85rem 2rem;">
+        <span>🔄 Request Plan Adjustments</span>
+    </a>
+    <a href="/dashboard" class="btn-secondary">Go to Dashboard</a>
+</div>
+{% endblock %}
