@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Athlete Feedback & Reviews – FitBuddy{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <span class="hero-tag">Athlete Community Voice</span>
+    <h1 class="hero-title">Your Voice Shapes <span>FitBuddy AI</span></h1>
+    <p class="hero-desc">Help us refine our training models, share your workout success stories, or request adjustments to your personalized AI workout plans.</p>
+</section>
+
+{% if feedback_submitted %}
+<div class="alert alert-success" role="alert" style="max-width: 800px; margin: 0 auto 2rem;">
+    <div>
+        <strong>🎉 Thank you, {{ submitter_name }}!</strong>
+        <p style="margin-top: 0.25rem;">Your {{ category }} feedback and {{ rating }}⭐ rating have been recorded. Our engineering & coaching team continuously reviews athlete input to enhance Gemini model prompts.</p>
+    </div>
+</div>
+{% endif %}
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; max-width: 1050px; margin: 0 auto 4rem;">
+
+    <!-- Left Column: Submit Platform Review & Feedback -->
+    <div class="card">
+        <div class="card-header">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⭐</div>
+            <h2 class="card-title">Share Your Experience</h2>
+            <p class="card-subtitle">Tell us what you love or what we can improve in FitBuddy.</p>
+        </div>
+
+        <form action="/submit-general-feedback" method="POST">
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="fb_name" class="form-label">Athlete Name / Handle</label>
+                <input type="text" id="fb_name" name="name" class="form-control" placeholder="e.g. Alex Johnson" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="fb_email" class="form-label">Email Address (Optional)</label>
+                <input type="email" id="fb_email" name="email" class="form-control" placeholder="alex@example.com">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="fb_category" class="form-label">Feedback Category</label>
+                <select id="fb_category" name="category" class="form-control" required>
+                    <option value="Workout Plan Accuracy">Workout Plan Accuracy & Quality</option>
+                    <option value="Nutrition Advice">Nutrition & Recovery Quality</option>
+                    <option value="Feature Request">Feature Request / Suggestion</option>
+                    <option value="App Design & Usability">App Design & Usability</option>
+                    <option value="Bug Report">Technical Issue / Bug Report</option>
+                    <option value="General Review">General Review & Praise</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="fb_rating" class="form-label">Overall Rating</label>
+                <select id="fb_rating" name="rating" class="form-control" required>
+                    <option value="5" selected>⭐⭐⭐⭐⭐ (5 / 5 - Outstanding)</option>
+                    <option value="4">⭐⭐⭐⭐ (4 / 5 - Very Good)</option>
+                    <option value="3">⭐⭐⭐ (3 / 5 - Good / Average)</option>
+                    <option value="2">⭐⭐ (2 / 5 - Needs Improvement)</option>
+                    <option value="1">⭐ (1 / 5 - Poor)</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label for="fb_comments" class="form-label">Detailed Comments</label>
+                <textarea id="fb_comments" name="comments" class="form-control" rows="4" placeholder="How has FitBuddy helped your fitness? What features would you like to see next?" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary">
+                <span>💬 Submit Athlete Feedback</span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Right Column: Adjust Existing Workout Plan Shortcut & Reviews -->
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+        
+        <!-- Recalibrate Specific Plan Card -->
+        <div class="card" style="border-top: 4px solid var(--primary); background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔄</div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem;">Adjust a Specific Workout Plan</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+                Need to swap exercises, increase rest days, or switch to bodyweight? Enter your user handle to load your active plan recalibration engine.
+            </p>
+
+            <form onsubmit="event.preventDefault(); const h = document.getElementById('quick_user_handle').value.trim(); if(h) window.location.href='/feedback/' + encodeURIComponent(h);">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="quick_user_handle" class="form-label">Your User ID / Handle</label>
+                    <input type="text" id="quick_user_handle" class="form-control" placeholder="e.g. alex101" required>
+                </div>
+                <button type="submit" class="btn-secondary" style="width: 100%; justify-content: center; font-weight: 600;">
+                    ⚡ Load My Plan Rebalance Studio →
+                </button>
+            </form>
+        </div>
+
+        <!-- Community Athlete Reviews Showcase -->
+        <div class="card">
+            <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span>💬</span> Athlete Testimonials
+            </h3>
+
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
+                        <strong style="color: var(--dark); font-size: 0.95rem;">Marcus Vance</strong>
+                        <span style="color: #f59e0b; font-size: 0.85rem;">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                        "The Gemini-generated split perfectly matched my home dumbbell set. The streak tracker kept me accountable for 30 straight days!"
+                    </p>
+                </div>
+
+                <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
+                        <strong style="color: var(--dark); font-size: 0.95rem;">Elena Rostova</strong>
+                        <span style="color: #f59e0b; font-size: 0.85rem;">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                        "Exporting to PDF and taking the exact sets and hydration plan into the gym made progressive overload effortless."
+                    </p>
+                </div>
+
+                <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
+                        <strong style="color: var(--dark); font-size: 0.95rem;">David Chen</strong>
+                        <span style="color: #f59e0b; font-size: 0.85rem;">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                        "The plan revision feature is unbeatable. When I injured my wrist, Gemini rebalanced my entire upper body day to bodyweight leg work in 3 seconds."
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
