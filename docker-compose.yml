@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./fitbuddy.db
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_WORKOUT_MODEL=gemini-2.5-flash
+      - GEMINI_NUTRITION_MODEL=gemini-2.5-flash
+      - SECRET_KEY=fitbuddy-super-secret-jwt-key-change-in-production-2026
+      - DEBUG=False
+    volumes:
+      - .:/app
+    restart: unless-stopped
